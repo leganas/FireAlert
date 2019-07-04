@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu_items">Test</string-array>
+    <string-array name="planets_array">
+        <item>Список котельных</item>
+        <item>История тревог</item>
+        <item>Настройки</item>
+        <item>О разработчике</item>
+    </string-array>
+    <string-array name="alert_list">
+        <item>Ни чего не делать</item>
+        <item>Оповестить при помощи телефона</item>
+        <item>Оповестить телефоном и отправить на сервер</item>
+        <item>Отправить на сервер оповещение</item>
+    </string-array>
+</resources>

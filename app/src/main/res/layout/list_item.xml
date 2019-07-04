@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list_item"
+    android:paddingBottom="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        app:contentPadding="5dp"
+        app:cardElevation="5dp"
+        style="@style/MyCardViewStyle"
+        android:layout_width="match_parent"
+        android:paddingLeft="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="25dp">
+
+                <TextView
+                android:text="Котельная"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_name"
+                android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="106dp"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="114dp"
+                    android:layout_height="106dp"
+                    app:srcCompat="@drawable/logo"
+                    android:id="@+id/imageView"
+                    android:layout_weight="0.30" />
+
+                <ImageView
+                    android:layout_width="95dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@android:drawable/stat_sys_phone_call"
+                    android:id="@+id/imageView3"
+                    android:layout_weight="0.18" />
+
+                <ImageView
+                    android:layout_width="95dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@android:drawable/btn_star_big_on"
+                    android:id="@+id/imageView4"
+                    android:layout_weight="0.28" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:text="Управление"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button_control"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
