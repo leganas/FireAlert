@@ -22,7 +22,7 @@ import static by.legan.android.firealert.BoilerControlAct.ID_BOILER;
  */
 
 public class IncomingSms extends BroadcastReceiver {
-    public static final String SMS_MSG =  "com.leganas.firealert.mobile.sms_msg";
+    public static final String SMS_MSG =  "by.legan.android.firealert.sms_msg";
 
     @Override
     public void onReceive(Context context, Intent intent) {

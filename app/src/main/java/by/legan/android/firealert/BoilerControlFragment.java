@@ -279,6 +279,9 @@ public class BoilerControlFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         UUID boiler_id = (UUID) getArguments().getSerializable(ID_BOILER);
+
+
+
         BoilerLab boilerLab = BoilerLab.get(getActivity());
         boiler = boilerLab.getBoiler(boiler_id);
 
