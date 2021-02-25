@@ -71,7 +71,6 @@ public class NotificationFireAlertWorker extends Worker {
             notificationManager.createNotificationChannel(channel);
         }
 
-        notificationManager.getNotificationChannel(SMS_MSG);
         notificationManager.notify(0, notificationBuilder.build());
 
         runSoundWorker();
