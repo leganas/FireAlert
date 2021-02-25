@@ -15,34 +15,34 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <Button
-                    android:text="Список"
-                    android:onClick="@{view::OnClickList}"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/bt_list"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:text="История"
-                    android:onClick="@{view::OnClickHistory}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{view::OnClickList}"
+                    android:text="Список" />
+
+                <Button
                     android:id="@+id/bt_history"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:visibility="visible"
-                    android:text="Test"
-                    android:onClick="@{view::OnClickTest}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{view::OnClickHistory}"
+                    android:text="История" />
+
+                <Button
                     android:id="@+id/bt_test"
-                    android:layout_weight="1" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{view::OnClickTest}"
+                    android:text="Test"
+                    android:visibility="gone" />
 
             </LinearLayout>
 

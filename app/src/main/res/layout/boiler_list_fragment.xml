@@ -9,22 +9,14 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="1">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView13"
-            android:layout_weight="0.02"
-            android:textSize="36sp" />
+        android:layout_height="match_parent">
 
         <TextView
             android:text="@string/boiler_list"
+            android:layout_marginTop="45dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
-            android:layout_weight="0.02"
             android:textSize="36sp"
             android:textAlignment="center" />
 

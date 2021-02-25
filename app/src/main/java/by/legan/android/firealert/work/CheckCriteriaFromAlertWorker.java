@@ -96,14 +96,18 @@ public class CheckCriteriaFromAlertWorker extends Worker {
         List<Boiler> boilers = service.getAll();
         ResultCheckCriteria result = new ResultCheckCriteria();
         StreamSupport.stream(boilers).forEach(boiler -> {
-            if (phoneNumber.contains(boiler.getAlert_number())){
-                StreamSupport.stream(boiler.getSmsEvents()).forEach(event -> {
-                    if (message.contains(event.getSms_text())) {
-                        result.setName(boiler.getName());
-                        result.setBoilerId(boiler.getId());
-                        result.setMessage(event.getAlert_text());
-                    }
-                });
+            try {
+                if (phoneNumber.contains(boiler.getAlert_number())){
+                    StreamSupport.stream(boiler.getSmsEvents()).forEach(event -> {
+                        if (message.contains(event.getSms_text())) {
+                            result.setName(boiler.getName());
+                            result.setBoilerId(boiler.getId());
+                            result.setMessage(event.getAlert_text());
+                        }
+                    });
+                }
+            } catch (Exception e) {
+                Log.e(this.getClass().getName(),e.toString());
             }
         });
         return result;
