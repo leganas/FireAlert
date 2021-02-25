@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.andreyls.mytestprojectsolo">
+    package="by.legan.android.firealert">
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -8,13 +8,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!-- EXTERNAL_STORAGE permissions are optional for Android 6.0 onwards. -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".FireAlertApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,25 +25,26 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name="by.legan.android.firealert.MainActivity">
+        <activity android:name="by.legan.android.firealert.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <receiver android:name="by.legan.android.firealert.IncomingSms">
+        <receiver android:name="by.legan.android.firealert.IncomingSmsReceiver">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
 
         <activity
-            android:name="by.legan.android.firealert.BoilerControlAct"
+            android:name="by.legan.android.firealert.view.boilerControl.BoilerControlActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="by.legan.android.firealert.AlertActivity" />
-        <activity android:name="by.legan.android.firealert.About" />
-        <activity android:name="by.legan.android.firealert.SettingsAct" />
+        <activity android:name="by.legan.android.firealert.view.alert.AlertActivity"
+                  android:showOnLockScreen="true"/>
+        <activity android:name="by.legan.android.firealert.view.about.About" />
+        <activity android:name="by.legan.android.firealert.view.setting.SettingsAct" />
     </application>
 
 </manifest>

@@ -1,56 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/history_item"
-    android:paddingBottom="10dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/history_view"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp"
-        app:contentPadding="5dp"
-        app:cardElevation="5dp"
-        style="@style/MyCardViewStyle"
+    <data>
+        <variable
+            name="history_item"
+            type="by.legan.android.firealert.data.model.HistoryItem" />
+        <variable
+            name="holder"
+            type="by.legan.android.firealert.view.historyList.HistoryListAdapter.HistoryListHolder" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:paddingLeft="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_height="wrap_content"
+        android:id="@+id/history_item"
+        android:paddingBottom="10dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/history_view"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="1">
-
-            <TextView
-            android:text="Объект"
+            app:cardCornerRadius="15dp"
+            app:contentPadding="5dp"
+            app:cardElevation="5dp"
+            style="@style/MyCardViewStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/boiler_name"
-            android:textSize="20sp" />
+            android:paddingLeft="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/alert_name"
-                android:textSize="18sp" />
+                android:orientation="vertical"
+                android:weightSum="1">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/alert_msg"
-                android:textSize="18sp" />
+                <TextView
+                    android:text="Объект"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/boiler_name"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/text_h_data"
-                android:textSize="18sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alert_name"
+                    android:textSize="18sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/alert_msg"
+                    android:textSize="18sp" />
 
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_h_data"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</layout>

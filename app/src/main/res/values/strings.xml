@@ -5,4 +5,5 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">key</string>
     <string name="new_boiler">Добавить объект</string>
     <string name="testAlert">Тест Оповещения</string>
+    <string name="boiler_list">Список Объектов</string>
 </resources>

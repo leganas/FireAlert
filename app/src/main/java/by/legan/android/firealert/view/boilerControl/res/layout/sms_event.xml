@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="model"
+            type="by.legan.android.firealert.view.boilerControl.MutableLiveDataSMSEvent" />
+        <variable
+            name="holder"
+            type="by.legan.android.firealert.view.boilerControl.SMSEventListAdapter.SMSEventListHolder" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="7dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardBackgroundColor="@color/colorAccent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="Текст SMS с кодом команды"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView4"
+                        android:layout_weight="1" />
+
+                    <Button
+                        android:onClick="@{holder::onClickDelSMSEvent}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/button_del_alert"
+                        android:layout_weight="1"
+                        android:text="X" />
+                </LinearLayout>
+
+                <EditText
+                    android:text="@={model.sms_text}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/editText_sms" />
+
+                <TextView
+                    android:text="Расшифровка кода SMS (словами)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView8" />
+
+                <EditText
+                    android:text="@={model.alert_text}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/edit_alertext" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:text="Реакция на сообщение"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView6" />
+
+                <Spinner
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_alert"
+                    android:layout_weight="1"
+                    android:entries="@array/alert_list" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+</layout>
