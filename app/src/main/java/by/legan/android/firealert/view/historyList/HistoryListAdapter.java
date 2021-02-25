@@ -32,7 +32,7 @@ public class HistoryListAdapter extends BaseListAdapter<HistoryItem, BaseListHol
         public void holderInitialisation() {
             HistoryItemBinding binding = (HistoryItemBinding) getBinding();
             binding.setHolder(this);
-            binding.setHistoryItem(getItem());
+            binding.setModel(getItem());
         }
     }
 

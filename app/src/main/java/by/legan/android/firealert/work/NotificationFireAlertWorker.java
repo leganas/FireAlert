@@ -54,12 +54,14 @@ public class NotificationFireAlertWorker extends Worker {
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(getApplicationContext(), SMS_MSG)
                         .setSmallIcon(R.drawable.alarme)
-                        .setContentTitle("Объект № " + getInputData().getLong(SMS_NUM, -1))
+                        .setContentTitle("Объект : " + getInputData().getString("BOILER_NAME"))
                         .setAutoCancel(true)
                         .setOngoing(false)
                         .setContentText(getInputData().getString(SMS_MSG))
+                        .addAction(android.R.drawable.ic_media_play, "Подробности", fullScreenPendingIntent)
 //                        .setContent(remoteViews)
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
+
                         .setFullScreenIntent(fullScreenPendingIntent, true);
 
         NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);

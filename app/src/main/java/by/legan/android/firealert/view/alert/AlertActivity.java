@@ -1,5 +1,7 @@
 package by.legan.android.firealert.view.alert;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
@@ -40,6 +42,9 @@ public class AlertActivity extends AppCompatActivity {
         });
         binding.imageView7.setImageResource(R.drawable.alarme);
         setTurnScreenOn();
+
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancelAll();
         setContentView(binding.getRoot());
     }
 

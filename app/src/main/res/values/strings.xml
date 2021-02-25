@@ -6,4 +6,26 @@
     <string name="new_boiler">Добавить объект</string>
     <string name="testAlert">Тест Оповещения</string>
     <string name="boiler_list">Список Объектов</string>
+    <string name="name_day1">Понедельник</string>
+    <string name="name_day2">Вторник</string>
+    <string name="name_day3">Среда</string>
+    <string name="name_day4">Четверг</string>
+    <string name="name_day5">Пятница</string>
+    <string name="name_day6">Суббота</string>
+    <string name="name_day7">Воскресенье</string>
+    <string name="name_month_1">Январь</string>
+    <string name="name_month_2">Февраль</string>
+    <string name="name_month_3">Март</string>
+    <string name="name_month_4">Апрель</string>
+    <string name="name_month_5">Май</string>
+    <string name="name_month_6">Июнь</string>
+    <string name="name_month_7">Июль</string>
+    <string name="name_month_8">Август</string>
+    <string name="name_month_9">Сентябрь</string>
+    <string name="name_month_10">Октябрь</string>
+    <string name="name_month_11">Ноябрь</string>
+    <string name="name_month_12">Декабрь</string>
+    <string name="message">Сообщение</string>
+    <string name="Object">Объект</string>
+    <string name="dste_time_event">Дата/Время сработки</string>
 </resources>

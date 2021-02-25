@@ -27,6 +27,7 @@ public class CheckCriteriaFromAlertWorker extends Worker {
 
     @lombok.Data
     public class ResultCheckCriteria {
+        String name;
         Long boilerId;
         String message;
     }
@@ -45,14 +46,16 @@ public class CheckCriteriaFromAlertWorker extends Worker {
 
         ResultCheckCriteria resultCheckCriteria = checkAlarmCriteria(getInputData().getString(SMS_NUM), getInputData().getString(SMS_MSG));
         if (resultCheckCriteria.getBoilerId() != null) {
-            runNotification(resultCheckCriteria.boilerId, resultCheckCriteria.message);
+            runNotification(resultCheckCriteria.name,resultCheckCriteria.boilerId, resultCheckCriteria.message);
+            runHistoryLog(resultCheckCriteria.name,resultCheckCriteria.boilerId, resultCheckCriteria.message);
             return Result.success();
         } else return Result.failure();
     }
 
-    public void runNotification(Long boilerId, String message){
+    public void runNotification(String name, Long boilerId, String message){
         Constraints constraints = new Constraints.Builder().build();
         Data.Builder data = new Data.Builder();
+        data.putString("BOILER_NAME", name);
         data.putLong(SMS_NUM, boilerId);
         data.putString(SMS_MSG, message);
 
@@ -68,6 +71,26 @@ public class CheckCriteriaFromAlertWorker extends Worker {
                 .enqueue();
     }
 
+    public void runHistoryLog(String name, Long boilerId, String message){
+        Constraints constraints = new Constraints.Builder().build();
+        Data.Builder data = new Data.Builder();
+        data.putString("BOILER_NAME", name);
+        data.putLong(SMS_NUM, boilerId);
+        data.putString(SMS_MSG, message);
+
+        OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(HistoryWorker.class)
+                .addTag(HistoryWorker.TAG)
+                .setInputData(data.build())
+                .setInitialDelay(0, TimeUnit.SECONDS)
+                .setConstraints(constraints)
+                .build();
+        WorkManager workManager = WorkManager.getInstance(getApplicationContext());
+        workManager
+                .beginUniqueWork(HistoryWorker.NAME, ExistingWorkPolicy.REPLACE, request)
+                .enqueue();
+    }
+
+
     public ResultCheckCriteria checkAlarmCriteria(String phoneNumber, String message){
         BoilerService service = new BoilerService(getApplicationContext());
         List<Boiler> boilers = service.getAll();
@@ -76,6 +99,7 @@ public class CheckCriteriaFromAlertWorker extends Worker {
             if (phoneNumber.contains(boiler.getAlert_number())){
                 StreamSupport.stream(boiler.getSmsEvents()).forEach(event -> {
                     if (message.contains(event.getSms_text())) {
+                        result.setName(boiler.getName());
                         result.setBoilerId(boiler.getId());
                         result.setMessage(event.getAlert_text());
                     }

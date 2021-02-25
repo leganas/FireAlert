@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="history_item"
+            name="model"
             type="by.legan.android.firealert.data.model.HistoryItem" />
         <variable
             name="holder"
@@ -14,7 +14,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/history_item"
         android:paddingBottom="10dp">
 
         <androidx.cardview.widget.CardView
@@ -37,28 +36,46 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:text="Объект"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/Object"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/boiler_name"
                     android:textSize="20sp" />
 
                 <TextView
+                    android:text="@{model.alertName}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/alert_name"
+                    android:id="@+id/object_name"
                     android:textSize="18sp" />
 
                 <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp" />
+
+                <TextView
+
+                    android:text="@{model.alertMessage}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/alert_msg"
                     android:textSize="18sp" />
 
                 <TextView
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="@string/dste_time_event"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_h_data"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:text="@{model.date_alert}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/date_msg"
                     android:textSize="18sp" />
 
             </LinearLayout>

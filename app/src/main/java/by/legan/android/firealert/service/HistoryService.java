@@ -26,6 +26,11 @@ public class HistoryService {
     }
 
     public MutableLiveData<List<HistoryItem>> getHistory(){
+        historyList.setValue(dao_repository.getAll());
         return historyList;
+    }
+
+    public long saveToHistory(HistoryItem item){
+        return dao_repository.insert(item);
     }
 }

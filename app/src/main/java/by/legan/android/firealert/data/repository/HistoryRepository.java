@@ -14,6 +14,6 @@ public interface HistoryRepository extends BaseCrudDAO_Repository<HistoryItem>{
     HistoryItem get(Long id);
 
     @Override
-    @Query("SELECT * FROM HistoryItem ORDER BY Id DESC")
+    @Query("SELECT * FROM HistoryItem ORDER BY Id DESC LIMIT 100")
     List<HistoryItem> getAll();
 }
