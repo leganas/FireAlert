@@ -1,7 +1,9 @@
 package by.legan.android.firealert.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.work.Constraints;
+import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -24,8 +27,11 @@ import by.legan.android.firealert.view.about.About;
 import by.legan.android.firealert.view.boilerList.BoilerListFragment;
 import by.legan.android.firealert.view.historyList.HistoryListFragment;
 import by.legan.android.firealert.view.setting.SettingsAct;
+import by.legan.android.firealert.work.CheckCriteriaFromAlertWorker;
 import by.legan.android.firealert.work.NotificationFireAlertWorker;
 
+import static by.legan.android.firealert.IncomingSmsReceiver.SMS_MSG;
+import static by.legan.android.firealert.IncomingSmsReceiver.SMS_NUM;
 import static by.legan.android.firealert.utils.FragmentUtils.bindingFragmentToContentFrame;
 
 /**
@@ -71,19 +77,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void OnClickTest(View view){
-        Constraints constraints = new Constraints.Builder()
-                .build();
+        showNotificationAlarm(getApplicationContext(),"+375333290490","1");
+    }
 
-        OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(NotificationFireAlertWorker.class)
-                .addTag(NotificationFireAlertWorker.TAG)
-                .setInitialDelay(1, TimeUnit.SECONDS)
+
+    private void showNotificationAlarm(Context context, String phoneNumber, String message) {
+        Log.d("SmsReceiver", "Start CheckCriteriaFromAlertWorker");
+        Constraints constraints = new Constraints.Builder().build();
+        Data.Builder data = new Data.Builder();
+        data.putString(SMS_NUM, phoneNumber);
+        data.putString(SMS_MSG, message);
+
+        OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(CheckCriteriaFromAlertWorker.class)
+                .addTag(CheckCriteriaFromAlertWorker.TAG)
+                .setInputData(data.build())
+                .setInitialDelay(0, TimeUnit.SECONDS)
                 .setConstraints(constraints)
                 .build();
-        WorkManager workManager = WorkManager.getInstance(getApplication().getApplicationContext());
+        WorkManager workManager = WorkManager.getInstance(context);
         workManager
-                .beginUniqueWork(NotificationFireAlertWorker.NAME, ExistingWorkPolicy.KEEP, request)
+                .beginUniqueWork(CheckCriteriaFromAlertWorker.NAME, ExistingWorkPolicy.REPLACE, request)
                 .enqueue();
     }
+
 
     /** Смена фрагментов в основном окне программы */
     private void selectItem(int position) {

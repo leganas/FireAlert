@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="model"
+            type="by.legan.android.firealert.view.alert.AlertActModel" />
 
     </data>
 
@@ -58,6 +61,175 @@
                 android:textSize="18sp"
                 android:textColor="@color/colorPrimary"
                 android:textAlignment="center" />
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="Параметры объекта"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="30dp"
+                        android:id="@+id/textView3"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp"
+                        android:textStyle="normal|bold" />
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Навание объекта :"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_name_boiler"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:text="@={model.boiler.name}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="30dp"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:id="@+id/edit_name_boiler"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Адресс объекта"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_address_boiler"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:text="@={model.boiler.address}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="30dp"
+                            android:inputType="textPersonName"
+                            android:ems="10"
+                            android:id="@+id/edit_address_boiler"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Тел. котельной"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_tel_boiler"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:text="@={model.boiler.phone_number_stationary}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="30dp"
+                            android:inputType="phone"
+                            android:ems="10"
+                            android:id="@+id/edit_tel_boiler"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Ф.И.О. Мастера"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_name_master"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:text="@={model.boiler.master_name}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="30dp"
+                            android:inputType="text"
+                            android:ems="10"
+                            android:id="@+id/edit_name_master"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Тел. мастера"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_tel_mobile"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:text="@={model.boiler.phone_number_mobile}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="30dp"
+                            android:inputType="phone"
+                            android:ems="10"
+                            android:id="@+id/edit_tel_mobile"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="Номер SIM, GSM контроллера"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/text_tel_alert"
+                            android:layout_weight="1"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="normal|bold"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:text="@={model.boiler.alert_number}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="30dp"
+                            android:inputType="phone"
+                            android:ems="10"
+                            android:id="@+id/edit_tel_alert"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </ScrollView>
+
         </LinearLayout>
 
         <Button

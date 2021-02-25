@@ -11,6 +11,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.work.Constraints;
+import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -19,10 +20,13 @@ import androidx.work.WorkerParameters;
 
 import java.util.concurrent.TimeUnit;
 
+import by.legan.android.firealert.GlobalValue;
 import by.legan.android.firealert.view.alert.AlertActivity;
 import by.legan.android.firealert.R;
 
 import static by.legan.android.firealert.IncomingSmsReceiver.SMS_MSG;
+import static by.legan.android.firealert.IncomingSmsReceiver.SMS_NUM;
+import static by.legan.android.firealert.work.CheckCriteriaFromAlertWorker.BOILER_ID;
 
 public class NotificationFireAlertWorker extends Worker {
     static final public String TAG = "Notification";
@@ -38,7 +42,8 @@ public class NotificationFireAlertWorker extends Worker {
         Log.d(TAG, this.getClass().getName()+": start");
 
         Intent fullScreenIntent = new Intent(getApplicationContext(), AlertActivity.class);
-        fullScreenIntent.putExtra(SMS_MSG, getInputData().getString(SMS_MSG));
+        GlobalValue.AlertBoilerId = getInputData().getLong(SMS_NUM, -1);
+        GlobalValue.AlertMsg = getInputData().getString(SMS_MSG);
         PendingIntent fullScreenPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, fullScreenIntent, 0);
 /*
         RemoteViews remoteViews = new RemoteViews(getApplicationContext().getPackageName(), R.layout.notification);
@@ -46,14 +51,13 @@ public class NotificationFireAlertWorker extends Worker {
         remoteViews.setOnClickPendingIntent(R.id.root, fullScreenPendingIntent);
 */
 
-
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(getApplicationContext(), SMS_MSG)
                         .setSmallIcon(R.drawable.alarme)
-                        .setContentTitle("Тревога")
+                        .setContentTitle("Объект № " + getInputData().getLong(SMS_NUM, -1))
                         .setAutoCancel(true)
                         .setOngoing(false)
-                        .setContentText("ПОЖАР")
+                        .setContentText(getInputData().getString(SMS_MSG))
 //                        .setContent(remoteViews)
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
                         .setFullScreenIntent(fullScreenPendingIntent, true);
@@ -64,10 +68,9 @@ public class NotificationFireAlertWorker extends Worker {
             channel.setDescription("channel_description");
             notificationManager.createNotificationChannel(channel);
         }
+
+        notificationManager.getNotificationChannel(SMS_MSG);
         notificationManager.notify(0, notificationBuilder.build());
-
-
-
 
         runSoundWorker();
 
@@ -84,7 +87,7 @@ public class NotificationFireAlertWorker extends Worker {
                 .build();
         WorkManager workManager = WorkManager.getInstance(getApplicationContext());
         workManager
-                .beginUniqueWork(AlertSoundWorker.NAME, ExistingWorkPolicy.KEEP, request)
+                .beginUniqueWork(AlertSoundWorker.NAME, ExistingWorkPolicy.REPLACE, request)
                 .enqueue();
     }
 }

@@ -1,14 +1,18 @@
 package by.legan.android.firealert.work;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import by.legan.android.firealert.R;
+
+import static by.legan.android.firealert.IncomingSmsReceiver.SMS_MSG;
 
 public class AlertSoundWorker extends Worker {
     static final public String TAG = "Notification";
@@ -23,7 +27,6 @@ public class AlertSoundWorker extends Worker {
     @Override
     public Result doWork() {
         Log.d(TAG, this.getClass().getName()+": start");
-
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.fire_alert);
         mediaPlayer.start();
 
