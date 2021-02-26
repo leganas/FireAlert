@@ -1,5 +1,8 @@
 package by.legan.android.firealert.data.model;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import androidx.databinding.BaseObservable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -35,4 +38,8 @@ public class Boiler extends BaseObservable {
     @TypeConverters({JSONConverter.class})
     private List<SMSEvent>smsEvents;
     private byte[] img; // Картинка
+
+    public Bitmap getBitmap(){
+        if (img != null) return BitmapFactory.decodeByteArray(img,0,img.length); else return null;
+    }
 }

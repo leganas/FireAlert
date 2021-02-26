@@ -45,6 +45,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
     implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.3'
+    implementation 'com.github.jrvansuita:PickImage:2.2.4'
 
 
     def lifecycle_version = "2.3.0"

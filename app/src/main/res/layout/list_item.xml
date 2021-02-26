@@ -45,6 +45,7 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
+                        app:load_image_bitmap="@{boiler.bitmap}"
                         app:srcCompat="@drawable/logo"
                         android:id="@+id/imageView" />
                         <LinearLayout

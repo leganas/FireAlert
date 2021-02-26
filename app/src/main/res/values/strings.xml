@@ -28,4 +28,7 @@
     <string name="message">Сообщение</string>
     <string name="Object">Объект</string>
     <string name="dste_time_event">Дата/Время сработки</string>
+    <string name="image_source">Источник фото</string>
+    <string name="camera_name_button">Камера</string>
+    <string name="gallery_name_button">Галерея</string>
 </resources>
