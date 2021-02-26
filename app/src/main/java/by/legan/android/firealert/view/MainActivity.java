@@ -1,7 +1,9 @@
 package by.legan.android.firealert.view;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,7 +11,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -30,6 +36,7 @@ import by.legan.android.firealert.view.setting.SettingsAct;
 import by.legan.android.firealert.work.CheckCriteriaFromAlertWorker;
 import by.legan.android.firealert.work.NotificationFireAlertWorker;
 
+import static android.Manifest.permission.READ_SMS;
 import static by.legan.android.firealert.IncomingSmsReceiver.SMS_MSG;
 import static by.legan.android.firealert.IncomingSmsReceiver.SMS_NUM;
 import static by.legan.android.firealert.utils.FragmentUtils.bindingFragmentToContentFrame;
@@ -38,7 +45,7 @@ import static by.legan.android.firealert.utils.FragmentUtils.bindingFragmentToCo
  * Created by AndreyLS on 26.01.2017.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  ActivityCompat.OnRequestPermissionsResultCallback{
     private MainBinding binding;
     private MainActivityModel model;
 
@@ -55,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         bindingFragmentToContentFrame(getSupportFragmentManager(), new BoilerListFragment(), binding.contentFrame.getId());
         setContentView(binding.getRoot());
     }
+
 
     //  Слушатель для элементов списка в выдвижной панели
     private class DrawerItemClickListener implements ListView.OnItemClickListener {

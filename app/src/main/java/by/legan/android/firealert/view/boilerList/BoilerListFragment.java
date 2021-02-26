@@ -1,7 +1,10 @@
 package by.legan.android.firealert.view.boilerList;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -9,7 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -29,6 +34,9 @@ import by.legan.android.firealert.view.boilerControl.BoilerControlActivity;
  */
 
 public class BoilerListFragment extends Fragment {
+    public static final int REQUEST_CODE_PERMISSION_RECEIVE_SMS = 1;
+    public static final int REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 2;
+
     BoilerListFragmentBinding binding;
     BoilerListFragmentModel model;
 
@@ -59,6 +67,52 @@ public class BoilerListFragment extends Fragment {
 
         return binding.getRoot();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        checkPermissionStatusSMS();
+    }
+
+    private void checkPermissionStatusSMS() {
+        int permissionStatus = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.RECEIVE_SMS);
+        if (permissionStatus != PackageManager.PERMISSION_GRANTED) requestPermissions(new String[] {Manifest.permission.RECEIVE_SMS}, REQUEST_CODE_PERMISSION_RECEIVE_SMS);  else checkPermissionStatusSTORAGE();
+    }
+    private void checkPermissionStatusSTORAGE() {
+        int permissionStatus = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionStatus != PackageManager.PERMISSION_GRANTED)
+            requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_PERMISSION_RECEIVE_SMS:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission granted
+                    Log.d(this.getClass().getName(),"RECEIVE_SMS permission granted");
+                    checkPermissionStatusSTORAGE();
+                } else {
+                    // permission denied
+                    Log.d(this.getClass().getName(),"RECEIVE_SMS permission denied");
+                    checkPermissionStatusSTORAGE();
+                }
+                return;
+            case REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission granted
+                    Log.d(this.getClass().getName(),"STORAGE permission granted");
+                } else {
+                    // permission denied
+                    Log.d(this.getClass().getName(),"STORAGE permission denied");
+                }
+                return;
+        }
+    }
+
 
 
     @Override
