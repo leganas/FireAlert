@@ -38,6 +38,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude("META-INF/*.kotlin_module")
+    }
 }
 
 dependencies {
@@ -46,7 +57,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
     implementation 'net.sourceforge.streamsupport:android-retrofuture:1.7.3'
     implementation 'com.github.jrvansuita:PickImage:2.2.4'
-
+    implementation group: 'org.springframework.android', name: 'spring-android-rest-template', version: '1.0.1.RELEASE'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.2'
 
     def lifecycle_version = "2.3.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"

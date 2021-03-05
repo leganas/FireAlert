@@ -11,13 +11,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.work.Constraints;
-import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import by.legan.android.firealert.GlobalValue;
@@ -26,7 +26,6 @@ import by.legan.android.firealert.R;
 
 import static by.legan.android.firealert.IncomingSmsReceiver.SMS_MSG;
 import static by.legan.android.firealert.IncomingSmsReceiver.SMS_NUM;
-import static by.legan.android.firealert.work.CheckCriteriaFromAlertWorker.BOILER_ID;
 
 public class NotificationFireAlertWorker extends Worker {
     static final public String TAG = "Notification";
@@ -73,22 +72,28 @@ public class NotificationFireAlertWorker extends Worker {
 
         notificationManager.notify(0, notificationBuilder.build());
 
-        runSoundWorker();
+        runSoundAndUploadAlertWorker();
 
         Log.d(TAG, this.getClass().getName()+": end");
         return Result.success();
     }
 
-    private void runSoundWorker() {
+    private void runSoundAndUploadAlertWorker() {
         Constraints constraints = new Constraints.Builder().build();
         OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(AlertSoundWorker.class)
                 .addTag(AlertSoundWorker.TAG)
                 .setInitialDelay(0, TimeUnit.SECONDS)
                 .setConstraints(constraints)
                 .build();
+        OneTimeWorkRequest request2 = new OneTimeWorkRequest.Builder(PutAlertMessageToServer.class)
+                .addTag(PutAlertMessageToServer.TAG)
+                .setInitialDelay(0, TimeUnit.SECONDS)
+                .setConstraints(constraints)
+                .build();
+
         WorkManager workManager = WorkManager.getInstance(getApplicationContext());
         workManager
-                .beginUniqueWork(AlertSoundWorker.NAME, ExistingWorkPolicy.REPLACE, request)
+                .beginUniqueWork(AlertSoundWorker.NAME, ExistingWorkPolicy.REPLACE, Arrays.asList(request, request2))
                 .enqueue();
     }
 }
