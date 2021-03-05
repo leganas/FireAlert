@@ -239,7 +239,7 @@
                                 android:onClick="@{view::onClickCreateSMSEvent}"
                                 android:text="Добавить оповещение"
                                 android:layout_width="match_parent"
-                                android:layout_height="36dp"
+                                android:layout_height="wrap_content"
                                 android:id="@+id/button_addalert"
                                 android:textSize="14sp" />
 

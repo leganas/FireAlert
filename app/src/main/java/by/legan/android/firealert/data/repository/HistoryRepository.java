@@ -16,4 +16,7 @@ public interface HistoryRepository extends BaseCrudDAO_Repository<HistoryItem>{
     @Override
     @Query("SELECT * FROM HistoryItem ORDER BY Id DESC LIMIT 100")
     List<HistoryItem> getAll();
+
+    @Query("DELETE FROM HistoryItem")
+    public void deleteAll();
 }

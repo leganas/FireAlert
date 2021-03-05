@@ -54,6 +54,8 @@ public class HistoryListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.clear_history:
+                model.historyService.clearAll();
+                updateUI();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

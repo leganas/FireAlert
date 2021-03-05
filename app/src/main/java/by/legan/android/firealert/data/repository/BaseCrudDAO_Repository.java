@@ -3,6 +3,7 @@ package by.legan.android.firealert.data.repository;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
@@ -16,5 +17,6 @@ public interface BaseCrudDAO_Repository<T>  {
     public int update(T object);
     @Delete
     public int delete(T object);
+
     public List<T> getAll();
 }

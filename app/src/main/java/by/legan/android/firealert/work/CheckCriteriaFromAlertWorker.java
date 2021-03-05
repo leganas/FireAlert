@@ -29,7 +29,8 @@ public class CheckCriteriaFromAlertWorker extends Worker {
     public class ResultCheckCriteria {
         String name;
         Long boilerId;
-        String message;
+        String message; // Сообщение для отображения
+        int percent = 0; // Процент соотвеествия оригинального сообщения / тексу в тригире
     }
 
     static final public String TAG = "Notification";
@@ -99,10 +100,14 @@ public class CheckCriteriaFromAlertWorker extends Worker {
             try {
                 if (phoneNumber.contains(boiler.getAlert_number())){
                     StreamSupport.stream(boiler.getSmsEvents()).forEach(event -> {
-                        if (message.contains(event.getSms_text())) {
-                            result.setName(boiler.getName());
-                            result.setBoilerId(boiler.getId());
-                            result.setMessage(event.getAlert_text());
+                        if (message.toLowerCase().contains(event.getSms_text().toLowerCase())) {
+                            int percent = calcPercent(message, event.getSms_text());
+                            if (result.getPercent() < percent) {
+                                result.setName(boiler.getName());
+                                result.setBoilerId(boiler.getId());
+                                result.setMessage(event.getAlert_text());
+                                result.setPercent(percent);
+                            }
                         }
                     });
                 }
@@ -110,6 +115,17 @@ public class CheckCriteriaFromAlertWorker extends Worker {
                 Log.e(this.getClass().getName(),e.toString());
             }
         });
+        return result;
+    }
+
+    private int calcPercent(String original, String trigger){
+        int result = 0;
+        if (original == null ||trigger == null) return 0;
+        if (original.toLowerCase().contains(trigger.toLowerCase())) {
+          int original_length = original.length();
+          int trigger_length = trigger.length();
+          result = Math.round(((float) trigger_length / (float) original_length)*100);
+        }
         return result;
     }
 }

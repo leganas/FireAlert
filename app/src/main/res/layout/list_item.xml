@@ -24,6 +24,7 @@
             app:cardCornerRadius="15dp"
             app:contentPadding="5dp"
             app:cardElevation="5dp"
+            android:onClick="@{holder::onClickControl}"
             style="@style/MyCardViewStyle"
             android:layout_width="match_parent"
             android:paddingLeft="5dp"
@@ -75,6 +76,7 @@
                     android:layout_height="wrap_content">
 
                     <Button
+                        android:visibility="gone"
                         android:text="Управление"
                         android:layout_width="wrap_content"
                         android:onClick="@{holder::onClickControl}"

@@ -33,4 +33,8 @@ public class HistoryService {
     public long saveToHistory(HistoryItem item){
         return dao_repository.insert(item);
     }
+
+    public void clearAll(){
+        dao_repository.deleteAll();
+    }
 }
