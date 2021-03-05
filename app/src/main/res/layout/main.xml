@@ -42,7 +42,7 @@
                     android:layout_weight="1"
                     android:onClick="@{view::OnClickTest}"
                     android:text="Test"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
