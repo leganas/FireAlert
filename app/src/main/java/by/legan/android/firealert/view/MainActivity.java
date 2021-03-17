@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements  ActivityCompat.O
     }
 
     public void OnClickTest(View view){
-        showNotificationAlarm(getApplicationContext(),"+375333290490","ALARM");
+        showNotificationAlarm(getApplicationContext(),"+375333290490","1");
     }
 
 

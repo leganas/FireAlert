@@ -93,7 +93,12 @@ public class NotificationFireAlertWorker extends Worker {
 
         WorkManager workManager = WorkManager.getInstance(getApplicationContext());
         workManager
-                .beginUniqueWork(AlertSoundWorker.NAME, ExistingWorkPolicy.REPLACE, Arrays.asList(request, request2))
+                .beginUniqueWork(AlertSoundWorker.NAME, ExistingWorkPolicy.REPLACE, request)
                 .enqueue();
+        workManager
+                .beginUniqueWork(PutAlertMessageToServer.NAME, ExistingWorkPolicy.REPLACE, request2)
+                .enqueue();
+
     }
+
 }
